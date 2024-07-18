@@ -16,6 +16,7 @@ import org.bukkit.event.inventory.TradeSelectEvent;
 
 public class PreventUnoptimizedTrading extends VillagerOptimizerModule implements Listener {
 
+    private final boolean first_trade_exempt;
     private final boolean notify_player;
 
     public PreventUnoptimizedTrading() {
@@ -24,6 +25,8 @@ public class PreventUnoptimizedTrading extends VillagerOptimizerModule implement
                 "Will prevent players from selecting and using trades of unoptimized villagers.\n" +
                 "Use this if you have a lot of villagers and therefore want to force your players to optimize them.\n" +
                 "Inventories can still be opened so players can move villagers around.");
+        this.first_trade_exempt = config.getBoolean(configPath + ".first-trade-exempt", true,
+                "The first trade made with a villager is exempt from this rule. This helps with villager rolling.");
         this.notify_player = config.getBoolean(configPath + ".notify-player", true,
                 "Sends players a message when they try to trade with an unoptimized villager.");
     }
@@ -49,6 +52,8 @@ public class PreventUnoptimizedTrading extends VillagerOptimizerModule implement
         if (event.getWhoClicked().hasPermission(Permissions.Bypass.TRADE_PREVENTION.get())) return;
         if (!(event.getInventory().getHolder() instanceof Villager)) return;
         if (wrapperCache.get((Villager) event.getInventory().getHolder()).isOptimized()) return;
+        if (first_trade_exempt && ((Villager) event.getInventory().getHolder()).getVillagerExperience() == 0
+        && ((Villager) event.getInventory().getHolder()).getVillagerLevel() == 1) return;
 
         event.setCancelled(true);
 
@@ -64,6 +69,8 @@ public class PreventUnoptimizedTrading extends VillagerOptimizerModule implement
         if (event.getWhoClicked().hasPermission(Permissions.Bypass.TRADE_PREVENTION.get())) return;
         if (!(event.getInventory().getHolder() instanceof Villager)) return;
         if (wrapperCache.get((Villager) event.getInventory().getHolder()).isOptimized()) return;
+        if (first_trade_exempt && ((Villager) event.getInventory().getHolder()).getVillagerExperience() == 0
+        && ((Villager) event.getInventory().getHolder()).getVillagerLevel() == 1) return;
 
         event.setCancelled(true);
 
