@@ -24,7 +24,7 @@ public class LanguageCache {
             command_specify_radius, command_radius_invalid, command_no_villagers_nearby,
             facing_command_optimize_success, facing_command_optimize_fail, facing_command_optimize_cooldown,
             facing_command_optimize_no_villager, facing_command_optimize_already_optimized,
-            facing_command_unoptimize_not_optimized,
+            facing_command_unoptimize_not_optimized, facing_command_optimize_claimed,
             trades_restocked, optimize_for_trading, villager_leveling_up;
 
     public LanguageCache(String locale) throws Exception {
@@ -98,6 +98,8 @@ public class LanguageCache {
                 "<red>This villager is already optimized.");
         this.facing_command_unoptimize_not_optimized = getListTranslation("messages.command.facing.unoptimize-not-optimized",
                 "<red>This villager is not optimized.");
+        this.facing_command_optimize_claimed = getListTranslation("messages.command.facing.optimize-claimed",
+                "<red>This villager is claimed by someone else.");
 
         try {
             this.lang.save();

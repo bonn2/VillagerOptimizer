@@ -7,6 +7,7 @@ website: ${project.url}
 api-version: '1.16'
 softdepend:
   - AntiVillagerLag
+  - GriefPrevention
 folia-supported: true
 
 commands:

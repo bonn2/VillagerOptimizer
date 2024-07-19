@@ -115,6 +115,10 @@
             <id>morepaperlib-repo</id>
             <url>https://mvn-repo.arim.space/lesser-gpl3/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -188,6 +192,13 @@
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
             <version>11.2.0</version>
+        </dependency>
+        <!-- Claim Protection Support -->
+        <dependency>
+            <groupId>com.github.GriefPrevention</groupId>
+            <artifactId>GriefPrevention</artifactId>
+            <version>16.18.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

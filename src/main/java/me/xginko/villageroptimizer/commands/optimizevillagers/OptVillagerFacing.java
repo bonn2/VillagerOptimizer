@@ -1,5 +1,6 @@
 package me.xginko.villageroptimizer.commands.optimizevillagers;
 
+import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import me.xginko.villageroptimizer.VillagerOptimizer;
 import me.xginko.villageroptimizer.WrapperCache;
 import me.xginko.villageroptimizer.commands.VillagerOptimizerCommand;
@@ -14,6 +15,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -31,6 +34,7 @@ public class OptVillagerFacing extends VillagerOptimizerCommand {
 
     private final long cooldown;
     private final int max_distance;
+    private final boolean use_grief_prevention;
 
     public OptVillagerFacing() {
         super("optimizevillager");
@@ -40,6 +44,8 @@ public class OptVillagerFacing extends VillagerOptimizerCommand {
                         "Here for configuration freedom. Recommended to leave as is to not enable any exploitable behavior.") * 1000L;
         this.max_distance = config.getInt("optimization-methods.commands.optimizevillager.max-distance", 5,
                 "The number of blocks away a targeted villager can be.");
+        this.use_grief_prevention = config.getBoolean("optimization-methods.commands.optimizevillager.use-grief-prevention", false,
+                "Check if villager is claimed by GriefPrevention.");
     }
 
     @Override
@@ -71,6 +77,15 @@ public class OptVillagerFacing extends VillagerOptimizerCommand {
             VillagerOptimizer.getLang(player.locale()).facing_command_optimize_no_villager
                     .forEach(line -> KyoriUtil.sendMessage(player, line));
             return true;
+        }
+
+        if (use_grief_prevention) {
+            final GriefPrevention griefPreventionPlugin = (GriefPrevention) Bukkit.getServer().getPluginManager().getPlugin("GriefPrevention");
+            if (griefPreventionPlugin.allowBreak(player, villager.getLocation().getBlock(), villager.getLocation()) != null) {
+                VillagerOptimizer.getLang(player.locale()).facing_command_optimize_claimed
+                        .forEach(line -> KyoriUtil.sendMessage(player, line));
+                return true;
+            }
         }
 
         WrappedVillager wVillager = wrapperCache.get(villager);
