@@ -41,7 +41,11 @@ public final class Permissions {
         OPTIMIZE_RADIUS(new Permission("villageroptimizer.cmd.optimize",
                 "Permission to optimize villagers in a radius", PermissionDefault.TRUE)),
         UNOPTIMIZE_RADIUS(new Permission("villageroptimizer.cmd.unoptimize",
-                "Permission to unoptimize villagers in a radius", PermissionDefault.TRUE));
+                "Permission to unoptimize villagers in a radius", PermissionDefault.TRUE)),
+        OPTIMIZE_FACING(new Permission("villageroptimizer.cmd.optimize.facing",
+                "Permission to optimize the villager you are facing", PermissionDefault.TRUE)),
+        UNOPTIMIZE_FACING(new Permission("villageroptimizer.cmd.unoptimize.facing",
+                "Permission to unoptimize the villager you are facing", PermissionDefault.TRUE));
 
         private final Permission permission;
 

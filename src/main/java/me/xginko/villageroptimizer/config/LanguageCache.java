@@ -22,6 +22,9 @@ public class LanguageCache {
             workstation_optimize_success, workstation_on_optimize_cooldown, workstation_unoptimize_success,
             command_optimize_success, command_radius_limit_exceed, command_optimize_fail, command_unoptimize_success,
             command_specify_radius, command_radius_invalid, command_no_villagers_nearby,
+            facing_command_optimize_success, facing_command_optimize_fail, facing_command_optimize_cooldown,
+            facing_command_optimize_no_villager, facing_command_optimize_already_optimized,
+            facing_command_unoptimize_not_optimized,
             trades_restocked, optimize_for_trading, villager_leveling_up;
 
     public LanguageCache(String locale) throws Exception {
@@ -82,6 +85,19 @@ public class LanguageCache {
                 "<red>The radius you entered is not a valid number. Try again.");
         this.command_no_villagers_nearby = getListTranslation("messages.command.no-villagers-nearby",
                 "<gray>Couldn't find any employed villagers within a radius of %radius%.");
+        // Facing command
+        this.facing_command_optimize_success = getListTranslation("messages.command.facing.optimize-success",
+                "<green>Successfully optimized the villager you are looking at.");
+        this.facing_command_optimize_fail = getListTranslation("messages.command.facing.optimize-fail",
+                "<red>Failed to optimize a villager.");
+        this.facing_command_optimize_cooldown = getListTranslation("messages.command.facing.optimize-cooldown",
+                "<gray>You need to wait %time% until you can optimize this villager again.");
+        this.facing_command_optimize_no_villager = getListTranslation("messages.command.facing.optimize-no-villager",
+                "<red>Failed to find a villager.");
+        this.facing_command_optimize_already_optimized = getListTranslation("messages.command.facing.optimize-already-optimized",
+                "<red>This villager is already optimized.");
+        this.facing_command_unoptimize_not_optimized = getListTranslation("messages.command.facing.unoptimize-not-optimized",
+                "<red>This villager is not optimized.");
 
         try {
             this.lang.save();

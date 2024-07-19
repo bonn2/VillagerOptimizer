@@ -28,3 +28,13 @@ commands:
     aliases:
       - unoptvils
       - noaiundo
+  optimizevillager:
+    usage: /optimizevillager
+    description: Optimize the villager you are looking at
+    aliases:
+      - optvil
+  unoptimizevillager:
+    usage: /unoptimizedvillager
+    description: Unoptimize the villager you are looking at
+    aliases:
+      - unoptvil
